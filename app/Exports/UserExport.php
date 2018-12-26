@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\{
     WithMapping  
 };
 
-class UserExport implements FromCollection {
+class UserExport implements FromCollection, WithMapping, WithHeadings {
 
     use Exportable;
     /**
@@ -19,7 +19,8 @@ class UserExport implements FromCollection {
     private $user;
 
     public function __construct($user) {
-        $this->user = $user;
+        $this->user = $user->operations;
+        $this->model = $user;
     }
 
     public function collection()
@@ -30,7 +31,22 @@ class UserExport implements FromCollection {
     public function map($user): array
     {
         return [ 
-            'name' => $user->name,            
+            'created_at' => $user['created_at'], 
+            'user' => $user['user']['name'],
+            'summ' => $user['summ'] . ' ' . $this->model['currency']['code'],                           
+            'operation' => $user['operation'],            
+            'conversion' => $user['conversion'] . ' ' . $user['user']['currency']['code'],                           
+        ];
+    }
+
+    public function headings(): array
+    {
+        return [
+            'Дата',
+            'Получатель',
+            'Колисество',
+            'Действие',
+            'Конвертация'
         ];
     }
 }

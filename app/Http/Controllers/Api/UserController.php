@@ -14,10 +14,9 @@ class UserController extends Controller
     public function show ($name, Request $request) {
         $model = $this->report($name, $request);
         if ($request->export) {
-            return Excel::store(new UserExport($model->operations), 'user.csv');
-        } else {
-            return $model;
+            Excel::store(new UserExport($model), 'user.csv');
         }
+        return $model;
     }
 
     public function export (Request $request) {
