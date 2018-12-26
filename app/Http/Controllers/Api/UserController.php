@@ -60,8 +60,6 @@ class UserController extends Controller
         ->where('name', $name)
         ->orWhere('id', $name)
         ->firstOrFail();
-
-        $model->operations->merge($model->forwards);
         return $model;
     }
 }
