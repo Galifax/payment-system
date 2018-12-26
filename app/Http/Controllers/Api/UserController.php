@@ -31,7 +31,7 @@ class UserController extends Controller
             }
         }])
         ->withCount(['operations as forwarded' => function ($q) use($request){ 
-            $q->select(DB::raw("SUM(conversion)"))->where('status', 1);
+            $q->select(DB::raw("SUM(summ)"))->where('status', 1);
             if ($request->date_from) {
                 $q->whereDate('created_at', '>=', $request->date_from);
             }
