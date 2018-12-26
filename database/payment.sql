@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 25 2018 г., 23:56
+-- Время создания: Дек 26 2018 г., 15:42
 -- Версия сервера: 5.7.19
 -- Версия PHP: 7.1.7
 
@@ -43,6 +43,33 @@ INSERT INTO `currencies` (`id`, `name`, `code`, `exchange`) VALUES
 (1, 'Гравна', 'UAH', 27.55),
 (2, 'Доллар', 'USD', 1),
 (3, 'Евро', 'EUR', 0.87);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `exchanges`
+--
+
+CREATE TABLE `exchanges` (
+  `id` int(11) NOT NULL,
+  `currency_id` int(11) NOT NULL,
+  `exchange` float NOT NULL,
+  `date` date NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `exchanges`
+--
+
+INSERT INTO `exchanges` (`id`, `currency_id`, `exchange`, `date`, `created_at`, `updated_at`) VALUES
+(1, 1, 27.7, '2018-12-26', '2018-12-26 00:00:00', '2018-12-26 00:00:00'),
+(2, 1, 27.23, '2018-12-25', '2018-12-25 00:00:00', '2018-12-25 00:00:00'),
+(3, 1, 26.94, '2018-12-24', '2018-12-24 00:00:00', '2018-12-24 00:00:00'),
+(4, 3, 0.85, '2018-12-26', '2018-12-26 00:00:00', '2018-12-26 00:00:00'),
+(5, 3, 0.89, '2018-12-25', '2018-12-25 00:00:00', '2018-12-25 00:00:00'),
+(6, 3, 0.84, '2018-12-24', '2018-12-24 00:00:00', '2018-12-24 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -144,6 +171,12 @@ ALTER TABLE `currencies`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `exchanges`
+--
+ALTER TABLE `exchanges`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `migrations`
 --
 ALTER TABLE `migrations`
@@ -180,6 +213,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `currencies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `exchanges`
+--
+ALTER TABLE `exchanges`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `migrations`
 --
