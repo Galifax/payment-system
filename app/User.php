@@ -19,6 +19,18 @@ class User extends Authenticatable
         'name', 'email', 'password', 'country', 'city', 'money', 'currency_id'
     ];
 
+    public function getReceivedAttribute($value) {
+        return round($value, 2);
+    }
+
+    public function getForwardedAttribute($value) {
+        return round($value, 2);
+    }
+
+    public function getBalanceAttribute($value) {
+        return round($value, 2);
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -32,13 +44,13 @@ class User extends Authenticatable
     public function operations()
     {
         return $this->hasMany('App\Operation', 'user_id', 'id')->orderBy('created_at', 'desc');
-       
     }
 
     public function forwards()
     {
         return $this->hasMany('App\Operation', 'recipient_id', 'id')->orderBy('created_at', 'desc');
     }
+
 
     public function currency()
     {

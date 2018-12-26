@@ -14,19 +14,15 @@ class UserController extends Controller
     public function show ($name, Request $request) {
         $model = $this->report($name, $request);
         if ($request->export) {
-            Excel::store(new UserExport($model), 'user.csv');
+            return Excel::download(new UserExport($model), 'report.xlsx');
         }
         return $model;
     }
 
-    public function export (Request $request) {
-        return Excel::store(new UserExport, 'user.csv');
-    }
-
     public function report ($name, $request) {
-        return User::
+        $model = User::
         withCount(['operations as balance' => function ($q) use($request){ 
-            $q->select(DB::raw("SUM(summ)"))->where('status', 0);
+            $q->select(DB::raw("SUM(conversion)"))->where('status', 0);
             if ($request->date_from) {
                 $q->whereDate('created_at', '>=', $request->date_from);
             }
@@ -35,7 +31,7 @@ class UserController extends Controller
             }
         }])
         ->withCount(['operations as forwarded' => function ($q) use($request){ 
-            $q->select(DB::raw("SUM(summ)"))->where('status', 1);
+            $q->select(DB::raw("SUM(conversion)"))->where('status', 1);
             if ($request->date_from) {
                 $q->whereDate('created_at', '>=', $request->date_from);
             }
@@ -44,7 +40,7 @@ class UserController extends Controller
             }
         }])
         ->withCount(['forwards as received' => function ($q) use($request){ 
-            $q->select(DB::raw("SUM(summ)"));
+            $q->select(DB::raw("SUM(conversion)"));
             if ($request->date_from) {
                 $q->whereDate('created_at', '>=', $request->date_from);
             }
@@ -64,5 +60,8 @@ class UserController extends Controller
         ->where('name', $name)
         ->orWhere('id', $name)
         ->firstOrFail();
+
+        $model->operations->merge($model->forwards);
+        return $model;
     }
 }

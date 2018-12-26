@@ -24,6 +24,7 @@ import store from './store'
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('profile', require('./components/Profile.vue').default);
 Vue.component('Report', require('./components/Reports.vue').default);
+Vue.component('Currencies', require('./components/Currencies.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -1,6 +1,6 @@
 <template>
     <div>
-        Баланс: {{ $store.state.balance }}
+        Баланс: {{ $store.state.balance }} {{ user.currency.code }}
         <up-balance :user="user" />
 
         <transfer :user="user" :users="users"/>

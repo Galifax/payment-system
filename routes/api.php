@@ -20,7 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', 'Api\AuthController@register');
 Route::post('/login', 'Api\AuthController@login');
 
+Route::get('/currencies', 'Api\CurrenciesController@index');
+Route::get('/currencies/{date}', 'Api\CurrenciesController@show');
+
 Route::post('/up-balance', 'Api\ProfileController@upBalance');
-Route::get('/export', 'Api\UserController@export');
 Route::post('/transfer', 'Api\ProfileController@transfer');
 Route::get('/users/{name}', 'Api\UserController@show');

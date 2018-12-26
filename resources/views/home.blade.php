@@ -8,7 +8,7 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                 <profile :user="{{ json_encode(Auth::user()) }}" :users="{{ json_encode($users) }}"/>
+                 <profile :user="{{ json_encode($user) }}" :users="{{ json_encode($users) }}"/>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
         <form @submit.prevent="submit()">
 
             <div class="form-group row">
-                <label for="number" class="col-md-4 col-form-label text-md-right">Количество едениц</label>
+                <label for="number" class="col-md-4 col-form-label text-md-right">Количество единиц</label>
                 <div class="col-md-6">
                     <input id="number" type="number" v-model="count" class="form-control"
                         name="number" required autofocus>

@@ -45,12 +45,11 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    
                     <ul class="navbar-nav ml-auto">
-                        @foreach($currencies as $currency)
-                        <li class="nav-item currency">
-                            {{ $currency->code }}: {{ $currency->exchange }}
+                        <li>
+                            <currencies />
                         </li>
-                        @endforeach
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">

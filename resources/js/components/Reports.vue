@@ -15,6 +15,7 @@
             <button class="btn btn-success">Найти</button>
         </form>
         <div class="info" v-if="user != ''">
+            <a :href="`/api/users/${form.name}?${form.date_from}&${form.date_to}&export=true`"  class="btn btn-danger" style="margin:20px 0 20px 0;">Скачать Excel</a>
             <table class="table">
                 <thead>
                     <tr>
