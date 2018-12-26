@@ -22,7 +22,7 @@ class UserController extends Controller
     public function report ($name, $request) {
         $model = User::
         withCount(['operations as balance' => function ($q) use($request){ 
-            $q->select(DB::raw("SUM(conversion)"))->where('status', 0);
+            $q->select(DB::raw("SUM(summ)"))->where('status', 0);
             if ($request->date_from) {
                 $q->whereDate('created_at', '>=', $request->date_from);
             }
